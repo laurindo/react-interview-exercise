@@ -2,18 +2,17 @@ import React, { Component } from 'react';
 import styles from './FriendListApp.css';
 import { connect } from 'react-redux';
 
-import {addFriend, deleteFriend, starFriend} from '../actions/FriendsActions';
-import { FriendList, AddFriendInput } from '../components';
+import * as friendActions from '../actions/FriendsActions';
+import { FriendList, AddFriendInput } from '../components/FriendList';
 
 class FriendListApp extends Component {
 
   render () {
-    const { friendlist: { friendsById }} = this.props;
-
+    const { friendsById, addFriend, deleteFriend, starFriend } = this.props;
     const actions = {
-      addFriend: this.props.addFriend,
-      deleteFriend: this.props.deleteFriend,
-      starFriend: this.props.starFriend
+      addFriend,
+      deleteFriend,
+      starFriend,
     };
 
     return (
@@ -26,12 +25,21 @@ class FriendListApp extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return state
+const mapStateToProps = state => {
+  return {
+    friendsById: state.friendlist.friendsById,
+  };
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addFriend: name => dispatch(friendActions.addFriend(name)),
+    deleteFriend: id => dispatch(friendActions.deleteFriend(id)),
+    starFriend: id => dispatch(friendActions.starFriend(id)),
+  };
 }
 
-export default connect(mapStateToProps, {
-  addFriend,
-  deleteFriend,
-  starFriend
-})(FriendListApp)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(FriendListApp)
