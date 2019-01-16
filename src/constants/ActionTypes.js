@@ -3,3 +3,7 @@ export const ADD_GENDER = 'ADD_GENDER';
 export const STAR_FRIEND = 'STAR_FRIEND';
 export const DELETE_FRIEND = 'DELETE_FRIEND';
 export const SHOW_FRIENDS_BY_PAGE = 'SHOW_FRIENDS_BY_PAGE';
+export const SET_GENDER = 'SET_GENDER';
+export const CLEAR_GENDER = 'CLEAR_GENDER';
+export const SET_FRIEND_NAME = 'SET_FRIEND_NAME';
+export const CLEAR_FRIEND_NAME = 'CLEAR_FRIEND_NAME';

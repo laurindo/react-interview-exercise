@@ -1,0 +1,7 @@
+:local(.messageNotification) {
+  background-color: #6fc5a6;
+  padding: 5px;
+  margin: 2px;
+  display: flex;
+  justify-content: center;
+}

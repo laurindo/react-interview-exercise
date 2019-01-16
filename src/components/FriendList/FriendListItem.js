@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import styles from './styles/FriendListItem.css';
+import Gender from '../Gender';
 
 class FriendListItem extends Component {
 
@@ -10,8 +11,9 @@ class FriendListItem extends Component {
       <li className={styles.friendListItem}>
         <div className={styles.friendInfos}>
           <div><span>{this.props.name}</span></div>
-          <div>
+          <div className={styles.infoDetail}>
             <small>xx friends in common</small>
+            <small>gender: <Gender gender={this.props.gender} /></small>
           </div>
         </div>
         <div className={styles.friendActions}>
@@ -34,7 +36,7 @@ class FriendListItem extends Component {
 }
 
 FriendListItem.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   starred: PropTypes.bool,
   starFriend: PropTypes.func.isRequired

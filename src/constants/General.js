@@ -1,7 +1,12 @@
+export const GENDER_NAME = {
+  male: 'male',
+  female: 'female',
+};
+
 export const GENDER = [{
-  value: 'male',
-  label: 'male',
+  value: GENDER_NAME.male,
+  label: 'Male',
 }, {
-  value: 'female',
-  label: 'female',
+  value: GENDER_NAME.female,
+  label: 'Female',
 }];

@@ -27,13 +27,14 @@ class AddFriendInput extends Component {
 
   handleChange (e) {
     this.setState({ name: e.target.value });
+    this.props.setFriendName(e.target.value);
   }
 
   handleSubmit (e) {
     const { pagination } = this.props;
     const name = e.target.value.trim();
     if (e.which === 13) {
-      this.props.addFriend(name, pagination);
+      //this.props.addFriend(name, pagination);
       this.setState({ name: '' });
     }
   }

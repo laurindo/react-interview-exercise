@@ -1,6 +1,7 @@
 import * as types from '../constants/ActionTypes';
 import * as paginationTypes from '../constants/PaginationTypes';
 import PaginationSettings from '../config/PaginationSettings';
+import { getUID } from '../utils/GeneralUtils';
 
 const initialState = {
   friendsById: [
@@ -8,18 +9,23 @@ const initialState = {
       name: 'Theodore Roosevelt',
       starred: true,
       gender: 'male',
+      id: getUID(),
     },
     {
       name: 'Abraham Lincoln',
       starred: false,
       gender: 'male',
+      id: getUID(),
     },
     {
       name: 'George Washington',
       starred: false,
       gender: 'male',
+      id: getUID(),
     }
   ],
+  currentFriendName: '',
+  currentGender: '',
   currentData: [],
   ...PaginationSettings,
 };
@@ -34,27 +40,58 @@ export default function friends(state = initialState, action) {
         friendsById: [
           ...state.friendsById,
           {
-            name: action.name,
-            gender: action.gender,
+            name: state.currentFriendName,
+            gender: state.currentGender,
+            id: getUID(),
           }
         ],
       };
     };
 
     case types.DELETE_FRIEND: {
+      let friends = [...state.friendsById];
+      let friend = friends.filter((item, index) => item.id !== action.id);
       return {
         ...state,
-        friendsById: state.friendsById.filter((item, index) => index !== action.id)
+        friendsById: friend,
       };
     };
 
     case types.STAR_FRIEND: {
       let friends = [...state.friendsById];
-      let friend = friends.find((item, index) => index === action.id);
+      let friend = friends.find((item, index) => item.id === action.id);
       friend.starred = !friend.starred;
       return {
         ...state,
         friendsById: friends
+      };
+    };
+
+    case types.SET_FRIEND_NAME: {
+      return {
+        ...state,
+        currentFriendName: action.payload,
+      };
+    };
+
+    case types.CLEAR_FRIEND_NAME: {
+      return {
+        ...state,
+        currentFriendName: '',
+      };
+    };
+
+    case types.SET_GENDER: {
+      return {
+        ...state,
+        currentGender: action.payload,
+      };
+    };
+
+    case types.CLEAR_GENDER: {
+      return {
+        ...state,
+        currentGender: '',
       };
     };
 
@@ -81,7 +118,7 @@ export default function friends(state = initialState, action) {
     };
 
     case paginationTypes.MOVE_RIGHT_PAGE: {
-      pageNumber = (state.pagination.startingPage + 1 > action.payload.length) ? action.payload.length : state.pagination.startingPage + 1;
+      pageNumber = (state.pagination.startingPage + 1 > action.payload.pageListNumber.length) ? action.payload.pageListNumber.length : state.pagination.startingPage + 1;
       return {
         ...state,
         pagination: {
@@ -92,12 +129,12 @@ export default function friends(state = initialState, action) {
     };
 
     case paginationTypes.SHOW_PAGE_NUMBER_ITEMS: {
-      const total = Math.ceil(action.payload.length / state.pagination.pageSize);
+      const total = Math.ceil(state.friendsById.length / state.pagination.pageSize);
       return {
         ...state,
         pagination: {
           ...state.pagination,
-          pageListNumber: [...action.payload.slice(0, total)],
+          pageListNumber: [...state.friendsById.slice(0, total)],
         },
       };
     };
