@@ -1,0 +1,20 @@
+:local(.containerSelectBox) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  background-color: #ebedf1;
+}
+
+:local(.containerSelectBox select) {
+  width: 100%;
+  padding: 5px;
+  background-color: transparent;
+  border: 0;
+  border: solid 1px #d4d7e0;
+  border-radius: 4px;
+}
+
+:local(.containerSelectBox label.readonly){
+  color: #fff;
+}

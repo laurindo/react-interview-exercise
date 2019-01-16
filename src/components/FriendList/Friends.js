@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import styles from './styles/FriendList.css';
 import FriendList from './FriendList';
 import AddFriendInput from './AddFriendInput';
+import SelectBox from '../SelectBox/SelectBox';
 import PaginationApp from '../../containers/PaginationApp';
+import { GENDER } from '../../constants/General';
 
 class Friends extends Component {
   componentDidMount() {
@@ -31,10 +33,18 @@ class Friends extends Component {
         <AddFriendInput
           pagination={pagination}
           addFriend={actions.addFriend} />
+
+        <SelectBox
+          title="Select a Gender"
+          name="genders"
+          id="gender"
+          options={GENDER} />
+
         <FriendList
           pagination={pagination}
           friends={currentData}
           actions={actions} />
+
         <PaginationApp />
       </div>
     );
