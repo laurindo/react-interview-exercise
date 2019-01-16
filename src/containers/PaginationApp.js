@@ -6,10 +6,10 @@ import { Pagination } from '../components/Pagination'
 
 const mapStateToProps = state => {
   return {
-    currentPageNumber: state.pagination.startingPage,
+    currentPageNumber: state.friendlist.pagination.startingPage,
     friends: state.friendlist.friendsById,
-    pageListNumber: state.pagination.pageListNumber,
-    pagination: state.pagination,
+    pageListNumber: state.friendlist.pagination.pageListNumber,
+    pagination: state.friendlist.pagination,
   };
 };
 

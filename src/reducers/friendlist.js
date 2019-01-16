@@ -22,6 +22,8 @@ const initialState = {
 };
 
 export default function friends(state = initialState, action) {
+  let pageNumber = null;
+
   switch (action.type) {
     case types.ADD_FRIEND: {
       return {
@@ -53,7 +55,7 @@ export default function friends(state = initialState, action) {
     };
 
     case types.SHOW_FRIENDS_BY_PAGE: {
-      const { pageSize, startingPage } = action.payload;
+      const { pageSize, startingPage } = state.pagination;
       const upperLimit = startingPage * pageSize;
       const currentData = state.friendsById.slice((upperLimit - pageSize), upperLimit);
 
@@ -64,26 +66,35 @@ export default function friends(state = initialState, action) {
     };
 
     case paginationTypes.MOVE_LEFT_PAGE: {
-      pageNumber = (state.startingPage - 1 <= 0) ? 1 : state.startingPage - 1;
+      pageNumber = (state.pagination.startingPage - 1 <= 0) ? 1 : state.pagination.startingPage - 1;
       return {
         ...state,
-        startingPage: pageNumber,
+        pagination: {
+          ...state.pagination,
+          startingPage: pageNumber,
+        },
       };
     };
 
     case paginationTypes.MOVE_RIGHT_PAGE: {
-      pageNumber = (state.startingPage + 1 > action.payload.length) ? action.payload.length : state.startingPage + 1;
+      pageNumber = (state.pagination.startingPage + 1 > action.payload.length) ? action.payload.length : state.pagination.startingPage + 1;
       return {
         ...state,
-        startingPage: pageNumber,
+        pagination: {
+          ...state.pagination,
+          startingPage: pageNumber,
+        },
       };
     };
 
     case paginationTypes.SHOW_PAGE_NUMBER_ITEMS: {
-      const total = Math.ceil(action.payload.length / state.pageSize);
+      const total = Math.ceil(action.payload.length / state.pagination.pageSize);
       return {
         ...state,
-        pageListNumber: action.payload.slice(0, total),
+        pagination: {
+          ...state.pagination,
+          pageListNumber: [...action.payload.slice(0, total)],
+        },
       };
     };
 

@@ -28,7 +28,9 @@ class Friends extends Component {
     return (
       <div className={styles.friendListApp}>
         <h1>The FriendList</h1>
-        <AddFriendInput addFriend={actions.addFriend} />
+        <AddFriendInput
+          pagination={pagination}
+          addFriend={actions.addFriend} />
         <FriendList
           pagination={pagination}
           friends={currentData}
