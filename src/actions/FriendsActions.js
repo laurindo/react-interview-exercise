@@ -20,3 +20,10 @@ export function starFriend(id) {
     id
   };
 }
+
+export function showFriendsByPageLimit(pagination) {
+  return {
+    type: types.SHOW_FRIENDS_BY_PAGE,
+    payload: pagination
+  };
+}

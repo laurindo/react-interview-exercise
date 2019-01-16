@@ -1,6 +1,7 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import styles from './FriendListItem.css';
+import styles from './styles/FriendListItem.css';
 
 class FriendListItem extends Component {
 

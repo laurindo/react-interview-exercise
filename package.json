@@ -5,9 +5,11 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
+    "prop-types": "^15.6.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",
+    "react-testing-library": "^5.4.4",
     "redux": "^3.6.0"
   },
   "devDependencies": {

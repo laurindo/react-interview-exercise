@@ -1,33 +1,13 @@
-import React, { Component } from 'react';
-import styles from './FriendListApp.css';
 import { connect } from 'react-redux';
 
 import * as friendActions from '../actions/FriendsActions';
-import { FriendList, AddFriendInput } from '../components/FriendList';
-
-class FriendListApp extends Component {
-
-  render () {
-    const { friendsById, addFriend, deleteFriend, starFriend } = this.props;
-    const actions = {
-      addFriend,
-      deleteFriend,
-      starFriend,
-    };
-
-    return (
-      <div className={styles.friendListApp}>
-        <h1>The FriendList</h1>
-        <AddFriendInput addFriend={actions.addFriend} />
-        <FriendList friends={friendsById} actions={actions} />
-      </div>
-    );
-  }
-}
+import Friends from '../components/FriendList/Friends';
 
 const mapStateToProps = state => {
   return {
     friendsById: state.friendlist.friendsById,
+    currentData: state.friendlist.currentData,
+    pagination: state.pagination,
   };
 };
 
@@ -36,10 +16,11 @@ function mapDispatchToProps(dispatch) {
     addFriend: name => dispatch(friendActions.addFriend(name)),
     deleteFriend: id => dispatch(friendActions.deleteFriend(id)),
     starFriend: id => dispatch(friendActions.starFriend(id)),
+    showFriendsByPageLimit: pagination => dispatch(friendActions.showFriendsByPageLimit(pagination)),
   };
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(FriendListApp)
+)(Friends);
