@@ -14,6 +14,13 @@ export function moveRightPage(data) {
   };
 }
 
+export function moveByNumber(data, number) {
+  return {
+    type: types.MOVE_BY_NUMBER,
+    payload: { ...data, number },
+  };
+}
+
 export function showPageItemsNumber(data) {
   return {
     type: types.SHOW_PAGE_NUMBER_ITEMS,

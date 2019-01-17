@@ -11,6 +11,10 @@ const mapStateToProps = state => {
     currentData: state.friendlist.currentData,
     pagination: state.friendlist.pagination,
     showMessage: state.message.showMessage,
+    friendTemporaryBasicInfo: {
+      name: state.friendlist.currentFriendName,
+      gender: state.friendlist.currentGender
+    },
   };
 };
 
@@ -28,7 +32,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(paginationActions.showPageItemsNumber());
       dispatch(friendActions.clearGender());
       dispatch(friendActions.clearFriendName());
-      dispatch(messageActions.showSuccess('success!!!!'));
+      dispatch(messageActions.showSuccess('friend added succesfully'));
     },
     deleteFriend: id => {
       dispatch(friendActions.deleteFriend(id));

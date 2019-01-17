@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import commonStyles from '../../styles/general.css';
 import styles from './styles/FriendList.css';
 import FriendList from './FriendList';
 import Form from '../Form/Form';
 import AddFriendInput from './AddFriendInput';
-import SelectBox from '../SelectBox/SelectBox';
+import SelectBox from '../SelectBox';
+import Button from '../Button';
 import PaginationApp from '../../containers/PaginationApp';
 import { GENDER } from '../../constants/General';
 
@@ -16,52 +18,41 @@ class Friends extends Component {
   render() {
     const {
       addFriend,
-      deleteFriend,
-      starFriend,
       setFriendName,
       setGender,
       pagination,
       currentData,
       showMessage,
+      friendTemporaryBasicInfo,
     } = this.props;
-
-    const actions = {
-      addFriend,
-      setFriendName,
-      deleteFriend,
-      starFriend,
-      setGender
-    };
 
     return (
       <div className={styles.friendListApp}>
         <h1>The FriendList</h1>
-        <div className="messageNotification">
-          {
-            (showMessage) ? <h1>success</h1> : null
-          }
-        </div>
         <Form>
           <AddFriendInput
             pagination={pagination}
-            setFriendName={actions.setFriendName}
-            addFriend={actions.addFriend} />
+            setFriendName={setFriendName}
+            addFriend={addFriend} />
 
           <SelectBox
             name="gender"
             title="Select a Gender"
             name="genders"
             id="gender"
-            onChange={actions.setGender}
+            onChange={setGender}
             options={GENDER} />
 
-          <button onClick={() => addFriend(pagination) }>Save</button>
+          <Button
+            disabled={!friendTemporaryBasicInfo.name || !friendTemporaryBasicInfo.gender}
+            title="Add"
+            onClick={addFriend} />
         </Form>
 
         <FriendList
           pagination={pagination}
           friends={currentData}
-          actions={actions} />
+          actions={{...this.props}} />
 
         <PaginationApp />
       </div>

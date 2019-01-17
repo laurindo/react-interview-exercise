@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import commonStyles from '../../styles/general.css';
 import styles from './styles/FriendListItem.css';
 import Gender from '../Gender';
 

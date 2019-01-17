@@ -23,6 +23,10 @@ function mapDispatchToProps(dispatch) {
       dispatch(paginationActions.moveRightPage(pagination));
       dispatch(friendsActions.showFriendsByPageLimit(pagination));
     },
+    moveByNumber: (pagination, number) => {
+      dispatch(paginationActions.moveByNumber(pagination, number));
+      dispatch(friendsActions.showFriendsByPageLimit(pagination));
+    },
     showPageItemsNumber: (data) => dispatch(paginationActions.showPageItemsNumber(data)),
   };
 }

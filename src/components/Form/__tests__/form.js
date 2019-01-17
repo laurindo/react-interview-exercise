@@ -17,6 +17,4 @@ test('#02', () => {
   );
 
   expect(container.select).toMatchSnapshot();
-
-  //expect(getByText('select a gender')).toHaveTextContent('select a gender');
 });

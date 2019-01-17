@@ -35,15 +35,18 @@ export default function friends(state = initialState, action) {
 
   switch (action.type) {
     case types.ADD_FRIEND: {
+      if (!state.currentFriendName && !state.currentGender) {
+        return { ...state };
+      }
       return {
         ...state,
         friendsById: [
-          ...state.friendsById,
           {
             name: state.currentFriendName,
             gender: state.currentGender,
             id: getUID(),
-          }
+          },
+          ...state.friendsById,
         ],
       };
     };
@@ -119,6 +122,17 @@ export default function friends(state = initialState, action) {
 
     case paginationTypes.MOVE_RIGHT_PAGE: {
       pageNumber = (state.pagination.startingPage + 1 > action.payload.pageListNumber.length) ? action.payload.pageListNumber.length : state.pagination.startingPage + 1;
+      return {
+        ...state,
+        pagination: {
+          ...state.pagination,
+          startingPage: pageNumber,
+        },
+      };
+    };
+
+    case paginationTypes.MOVE_BY_NUMBER: {
+      pageNumber = (action.payload.number > action.payload.pageListNumber.length) ? action.payload.pageListNumber.length : action.payload.number;
       return {
         ...state,
         pagination: {

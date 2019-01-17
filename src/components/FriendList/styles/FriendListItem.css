@@ -28,17 +28,3 @@
   display: flex;
   flex-direction: column;
 }
-
-button:focus {
-  outline: 0 !important;
-}
-
-.blue {
-  color: #2588de;
-  font-weight: 600;
-}
-
-.pink {
-  color: #de25ce;
-  font-weight: 600;
-}

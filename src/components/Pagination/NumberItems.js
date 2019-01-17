@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default ({ index, currentPage, page, handleClick }) => {
+export default ({ index, currentPage, page, handleClick, pagination }) => {
   return (
     <li
       key={index}
@@ -11,7 +11,9 @@ export default ({ index, currentPage, page, handleClick }) => {
       <a
         className="page-link"
         href="#"
-        onClick={e => handleClick(page, e)}>
+        onClick={e => {
+          return handleClick(pagination, parseInt(e.target.innerHTML));
+        }}>
           { page }
       </a>
     </li>

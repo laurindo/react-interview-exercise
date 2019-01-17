@@ -11,7 +11,7 @@ export default class Pagination extends Component {
   }
 
   render() {
-    const { pageListNumber, pagination, currentPageNumber, moveLeft, moveRight } = this.props;
+    const { pageListNumber, pagination, currentPageNumber, moveLeft, moveRight, moveByNumber } = this.props;
 
     return (
       <nav className={styles.containerPagination} aria-label="Friends">
@@ -30,7 +30,8 @@ export default class Pagination extends Component {
                   index={index}
                   currentPage={currentPageNumber}
                   page={index+1}
-                  handleClick={this.handleClick} />
+                  pagination={pagination}
+                  handleClick={moveByNumber} />
               );
             })
           }
