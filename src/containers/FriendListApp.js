@@ -1,37 +1,50 @@
-import React, { Component } from 'react';
-import styles from './FriendListApp.css';
 import { connect } from 'react-redux';
 
-import {addFriend, deleteFriend, starFriend} from '../actions/FriendsActions';
-import { FriendList, AddFriendInput } from '../components';
+import * as friendActions from '../actions/FriendsActions';
+import * as paginationActions from '../actions/PaginationActions';
+import * as messageActions from '../actions/MessageActions';
+import Friends from '../components/FriendList/Friends';
 
-class FriendListApp extends Component {
+const mapStateToProps = state => {
+  return {
+    friendsById: state.friendlist.friendsById,
+    currentData: state.friendlist.currentData,
+    pagination: state.friendlist.pagination,
+    showMessage: state.message.showMessage,
+    friendTemporaryBasicInfo: {
+      name: state.friendlist.currentFriendName,
+      gender: state.friendlist.currentGender
+    },
+  };
+};
 
-  render () {
-    const { friendlist: { friendsById }} = this.props;
-
-    const actions = {
-      addFriend: this.props.addFriend,
-      deleteFriend: this.props.deleteFriend,
-      starFriend: this.props.starFriend
-    };
-
-    return (
-      <div className={styles.friendListApp}>
-        <h1>The FriendList</h1>
-        <AddFriendInput addFriend={actions.addFriend} />
-        <FriendList friends={friendsById} actions={actions} />
-      </div>
-    );
-  }
+function mapDispatchToProps(dispatch) {
+  return {
+    setGender: (gender) => {
+      dispatch(friendActions.setGender(gender));
+    },
+    setFriendName: (name) => {
+      dispatch(friendActions.setFriendName(name));
+    },
+    addFriend: (pagination) => {
+      dispatch(friendActions.addFriend());
+      dispatch(friendActions.showFriendsByPageLimit(pagination));
+      dispatch(paginationActions.showPageItemsNumber());
+      dispatch(friendActions.clearGender());
+      dispatch(friendActions.clearFriendName());
+      dispatch(messageActions.showSuccess('friend added succesfully'));
+    },
+    deleteFriend: id => {
+      dispatch(friendActions.deleteFriend(id));
+      dispatch(friendActions.showFriendsByPageLimit());
+      dispatch(paginationActions.showPageItemsNumber());
+    },
+    starFriend: id => dispatch(friendActions.starFriend(id)),
+    showFriendsByPageLimit: pagination => dispatch(friendActions.showFriendsByPageLimit(pagination)),
+  };
 }
 
-function mapStateToProps(state) {
-  return state
-}
-
-export default connect(mapStateToProps, {
-  addFriend,
-  deleteFriend,
-  starFriend
-})(FriendListApp)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Friends);

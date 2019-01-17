@@ -1,0 +1,34 @@
+body {
+  background-color: #F4F3F0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnSave {
+  width: 100%;
+  background: #a3eab9;
+  border: solid 1px #fff;
+  padding: 5px;
+}
+
+.blue {
+  color: #2588de;
+  font-weight: 600;
+}
+
+.pink {
+  color: #de25ce;
+  font-weight: 600;
+}
+
+button:focus {
+  outline: 0 !important;
+}
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #fffefe;
+  background-color: #e6e6e6;
+  color: #bdbdbd;
+}

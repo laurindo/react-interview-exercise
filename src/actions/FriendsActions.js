@@ -20,3 +20,35 @@ export function starFriend(id) {
     id
   };
 }
+
+export function showFriendsByPageLimit() {
+  return {
+    type: types.SHOW_FRIENDS_BY_PAGE,
+  };
+}
+
+export function setFriendName(name) {
+  return {
+    type: types.SET_FRIEND_NAME,
+    payload: name,
+  };
+}
+
+export function setGender(gender) {
+  return {
+    type: types.SET_GENDER,
+    payload: gender,
+  };
+}
+
+export function clearGender() {
+  return {
+    type: types.CLEAR_GENDER,
+  };
+}
+
+export function clearFriendName() {
+  return {
+    type: types.CLEAR_FRIEND_NAME,
+  };
+}

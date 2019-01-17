@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react';
-import styles from './FriendList.css';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import styles from './styles/FriendList.css';
 import FriendListItem from './FriendListItem';
 
 class FriendList extends Component {
@@ -11,8 +12,9 @@ class FriendList extends Component {
             return (
               <FriendListItem
                 key={index}
-                id={index}
+                id={friend.id}
                 name={friend.name}
+                gender={friend.gender}
                 starred={friend.starred}
                 {...this.props.actions} />
             );
