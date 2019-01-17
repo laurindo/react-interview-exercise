@@ -31,6 +31,7 @@ class Friends extends Component {
         <h1>The FriendList</h1>
         <Form>
           <AddFriendInput
+            value={friendTemporaryBasicInfo.name}
             pagination={pagination}
             setFriendName={setFriendName}
             addFriend={addFriend} />
@@ -40,6 +41,7 @@ class Friends extends Component {
             title="Select a Gender"
             name="genders"
             id="gender"
+            value={friendTemporaryBasicInfo.gender}
             onChange={setGender}
             options={GENDER} />
 

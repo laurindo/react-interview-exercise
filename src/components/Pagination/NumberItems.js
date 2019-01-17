@@ -11,9 +11,7 @@ export default ({ index, currentPage, page, handleClick, pagination }) => {
       <a
         className="page-link"
         href="#"
-        onClick={e => {
-          return handleClick(pagination, parseInt(e.target.innerHTML));
-        }}>
+        onClick={(e) => handleClick(pagination, parseInt(e.target.innerHTML, 10))}>
           { page }
       </a>
     </li>

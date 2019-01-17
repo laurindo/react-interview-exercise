@@ -5,19 +5,6 @@ import styles from './styles/AddFriendInput.css';
 
 class AddFriendInput extends Component {
 
-  render () {
-    return (
-      <input
-        type="text"
-        autoFocus="true"
-        className={classnames('form-control', styles.addFriendInput)}
-        placeholder="Type the name of a friend"
-        value={this.state.name}
-        onChange={this.handleChange.bind(this)}
-        onKeyDown={this.handleSubmit.bind(this)} />
-    );
-  }
-
   constructor (props, context) {
     super(props, context);
     this.state = {
@@ -30,15 +17,17 @@ class AddFriendInput extends Component {
     this.props.setFriendName(e.target.value);
   }
 
-  handleSubmit (e) {
-    const { pagination } = this.props;
-    const name = e.target.value.trim();
-    if (e.which === 13) {
-      //this.props.addFriend(name, pagination);
-      this.setState({ name: '' });
-    }
+  render () {
+    return (
+      <input
+        type="text"
+        autoFocus="true"
+        className={classnames('form-control', styles.addFriendInput)}
+        placeholder="Type the name of a friend"
+        value={this.props.value}
+        onChange={this.handleChange.bind(this)} />
+    );
   }
-
 }
 
 AddFriendInput.propTypes = {

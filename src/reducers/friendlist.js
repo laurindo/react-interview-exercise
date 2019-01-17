@@ -32,9 +32,11 @@ const initialState = {
 
 export default function friends(state = initialState, action) {
   let pageNumber = null;
+  let friends = null;
+  let friend = null;
 
   switch (action.type) {
-    case types.ADD_FRIEND: {
+    case types.ADD_FRIEND:
       if (!state.currentFriendName && !state.currentGender) {
         return { ...state };
       }
@@ -49,56 +51,53 @@ export default function friends(state = initialState, action) {
           ...state.friendsById,
         ],
       };
-    };
 
-    case types.DELETE_FRIEND: {
-      let friends = [...state.friendsById];
-      let friend = friends.filter((item, index) => item.id !== action.id);
+    case types.DELETE_FRIEND:
+      friends = [...state.friendsById];
+      friend = friends.filter((item, index) => item.id !== action.id);
       return {
         ...state,
         friendsById: friend,
       };
-    };
 
-    case types.STAR_FRIEND: {
-      let friends = [...state.friendsById];
-      let friend = friends.find((item, index) => item.id === action.id);
+    case types.STAR_FRIEND:
+      friends = [...state.friendsById];
+      friend = friends.find((item, index) => item.id === action.id);
       friend.starred = !friend.starred;
       return {
         ...state,
         friendsById: friends
       };
-    };
 
-    case types.SET_FRIEND_NAME: {
+    case types.SET_FRIEND_NAME:
       return {
         ...state,
         currentFriendName: action.payload,
       };
-    };
 
-    case types.CLEAR_FRIEND_NAME: {
+
+    case types.CLEAR_FRIEND_NAME:
       return {
         ...state,
         currentFriendName: '',
       };
-    };
 
-    case types.SET_GENDER: {
+
+    case types.SET_GENDER:
       return {
         ...state,
         currentGender: action.payload,
       };
-    };
 
-    case types.CLEAR_GENDER: {
+
+    case types.CLEAR_GENDER:
       return {
         ...state,
         currentGender: '',
       };
-    };
 
-    case types.SHOW_FRIENDS_BY_PAGE: {
+
+    case types.SHOW_FRIENDS_BY_PAGE:
       const { pageSize, startingPage } = state.pagination;
       const upperLimit = startingPage * pageSize;
       const currentData = state.friendsById.slice((upperLimit - pageSize), upperLimit);
@@ -107,9 +106,9 @@ export default function friends(state = initialState, action) {
         ...state,
         currentData,
       };
-    };
 
-    case paginationTypes.MOVE_LEFT_PAGE: {
+
+    case paginationTypes.MOVE_LEFT_PAGE:
       pageNumber = (state.pagination.startingPage - 1 <= 0) ? 1 : state.pagination.startingPage - 1;
       return {
         ...state,
@@ -118,9 +117,9 @@ export default function friends(state = initialState, action) {
           startingPage: pageNumber,
         },
       };
-    };
 
-    case paginationTypes.MOVE_RIGHT_PAGE: {
+
+    case paginationTypes.MOVE_RIGHT_PAGE:
       pageNumber = (state.pagination.startingPage + 1 > action.payload.pageListNumber.length) ? action.payload.pageListNumber.length : state.pagination.startingPage + 1;
       return {
         ...state,
@@ -129,9 +128,9 @@ export default function friends(state = initialState, action) {
           startingPage: pageNumber,
         },
       };
-    };
 
-    case paginationTypes.MOVE_BY_NUMBER: {
+
+    case paginationTypes.MOVE_BY_NUMBER:
       pageNumber = (action.payload.number > action.payload.pageListNumber.length) ? action.payload.pageListNumber.length : action.payload.number;
       return {
         ...state,
@@ -140,9 +139,9 @@ export default function friends(state = initialState, action) {
           startingPage: pageNumber,
         },
       };
-    };
 
-    case paginationTypes.SHOW_PAGE_NUMBER_ITEMS: {
+
+    case paginationTypes.SHOW_PAGE_NUMBER_ITEMS:
       const total = Math.ceil(state.friendsById.length / state.pagination.pageSize);
       return {
         ...state,
@@ -151,7 +150,7 @@ export default function friends(state = initialState, action) {
           pageListNumber: [...state.friendsById.slice(0, total)],
         },
       };
-    };
+
 
     default:
       return state;
