@@ -14,18 +14,18 @@ class FriendListItem extends Component {
           <div><span>{this.props.name}</span></div>
           <div className={styles.infoDetail}>
             <small>xx friends in common</small>
-            <small>gender: <Gender gender={this.props.gender} /></small>
+            <small className='gender'>gender: <Gender gender={this.props.gender} /></small>
           </div>
         </div>
         <div className={styles.friendActions}>
-          <button className={`btn btn-default ${styles.btnAction}`}
+          <button className={`btn btn-default star ${styles.btnAction}`}
                   onClick={() => this.props.starFriend(this.props.id)}>
             <i className={classnames('fa', {
               'fa-star': this.props.starred,
               'fa-star-o': !this.props.starred
             })} />
           </button>
-          <button className={`btn btn-default ${styles.btnAction}`}
+          <button className={`btn btn-default trash ${styles.btnAction}`}
                   onClick={() => this.props.deleteFriend(this.props.id)}>
             <i className="fa fa-trash" />
           </button>
