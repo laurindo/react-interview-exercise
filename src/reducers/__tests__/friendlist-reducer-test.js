@@ -57,34 +57,6 @@ describe('FRIENDLIST REDUCERS', () => {
     expect(result2.friendsById[0].starred).toEqual(true);
   });
 
-  it('should handle ADD_FRIEND', () => {
-    const state = reducer(undefined, {});
-    const id = state.friendsById[0].id;
-
-    // setting a friend name
-    const actionSetFriendName = {
-      type: types.SET_FRIEND_NAME,
-      payload: "Daniel Laurindo"
-    };
-    const newState1 = reducer(state, actionSetFriendName);
-
-    // setting a gender
-    const actionSetGender = {
-      type: types.SET_GENDER,
-      payload: "male"
-    };
-    const newState2 = reducer(newState1, actionSetGender);
-
-    // adding a friend name
-    const actionAddFriend = {
-      type: types.ADD_FRIEND,
-    };
-    const newState3 = reducer(newState2, actionAddFriend);
-
-    expect(newState3.friendsById[3].name).toEqual("Daniel Laurindo");
-    expect(newState3.friendsById[3].starred).toEqual(undefined);
-  });
-
   it('should handle DELETE_FRIEND', () => {
     const state = reducer(undefined, {});
 
